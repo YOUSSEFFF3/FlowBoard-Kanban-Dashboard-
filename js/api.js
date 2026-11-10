@@ -12,4 +12,5 @@ export function apiData() {
     donne=dataa 
  affichage(donne)
 })
+
 }
