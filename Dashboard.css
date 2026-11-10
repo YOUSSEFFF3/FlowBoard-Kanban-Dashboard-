@@ -1,0 +1,108 @@
+
+*{
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.cart-form{
+    display:column;
+border: 1px solid red;
+width: 700px ;
+margin: 40px 450px;
+background-color: cadetblue;
+border-radius: 20px;
+}
+input{
+    border-radius: 15px;
+}
+.tach-discript{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding:16px 40px;
+    align-items: center;
+    background-color:rgb(100, 237, 184);
+}
+.icone{
+    display: flex;
+}
+.label{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem ;
+    padding: 1rem;
+}
+.hide{
+    display: none !important;
+}
+.h2{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-left:300px;
+    padding-top: 2rem;
+}
+.les-taches{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.cart-1{
+    border: 1px solid red;
+    width:470px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cart-2{
+border: 1px solid red;
+    width:470px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cart-3{
+border: 1px solid red;
+    width:470px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cart{
+   border: 1px solid red;
+    width:400px;
+    height: 200px; 
+     background-color: rgb(1, 21, 21);
+    margin: 10px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px ;
+    padding: 2rem;
+    color: rgb(224, 219, 212);    
+}
+.box-description{
+    border: 3px solid rgb(146, 139, 139);
+    height: 3rem;
+    border-radius: 15px;
+}
+.priority{
+    /* border: 2px solid red; */
+    width:max-content ;
+    border-radius: 15px;
+    background-color:rgb(125, 6, 6);
+    height: 1.5rem;
+    font-size:medium;
+ 
+}
+.person-box{
+     border: 3px solid rgb(146, 139, 139);
+     height: 20px;
+     width: 50%;
+}
