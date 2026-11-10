@@ -1,0 +1,143 @@
+
+*{
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.cart-form{
+    display:column;
+
+width: 700px ;
+margin: 40px 450px;
+background-color: cadetblue;
+border-radius: 20px;
+}
+input{
+    border-radius: 15px;
+}
+.tach-discript{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding:16px 40px;
+    align-items: center;
+    background-color:#111827;
+}
+.icone{
+    display: flex;
+}
+.label{
+    display: flex;
+    flex-direction: column;
+    /* margin: 1rem ;
+    padding: 1rem; */
+}
+body{
+    background-color: #0F172A;
+}
+.hide{
+    display: none !important;
+}
+.h2{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-left:300px;
+    padding-top: 2rem;
+}
+.les-taches{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+
+}
+
+.cart-1{
+    
+    width:470px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cart-2{
+
+    width:470px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cart-3{
+
+    width:470px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.person-box{
+    display: flex;
+    align-items: center;
+}
+.description{
+
+   margin: 2px;
+}
+.label{
+    color: #CBD5E1;
+}
+.titre{
+    color: #F8FAFC;
+}
+.cart:hover{
+    background-color: #273449;
+}
+.cart{
+   background-color: #1E293B;
+   border: 1px solid #334155;
+    width:400px;
+    height: max-content; 
+    margin: 10px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px ;
+    padding: 2rem;
+    color: rgb(224, 219, 212);    
+}
+.box-description{
+     background-color: #0F172A;
+    
+     border: 1px solid 	#475569;
+    height: 4rem;
+    border-radius: 15px;
+}
+.priority{
+   
+    width:max-content ;
+    border-radius: 15px;
+    
+    
+    font-size:medium;
+ 
+}
+.form-search{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.assignee{
+    margin: 2px;
+}
+
+.person-box{
+     background-color: #0F172A;
+      border: 1px solid#475569;
+     height: 2rem;
+     border-radius: 15px;
+     width: 50%;
+}
