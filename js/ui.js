@@ -99,7 +99,6 @@ retuen.addEventListener("click", () => {
     document.querySelector(".les-taches").classList.remove("hide")
     reseting(form)
 })
-
 // export function filteer(data) {
 //     if (!search.value) {
 //         affichage(data)
@@ -132,11 +131,11 @@ retuen.addEventListener("click", () => {
 // }
 let search = document.querySelector(".search")
 search.addEventListener("input", (e) => {
-    let resultat = donne.filter(element => {
-        return element.title.toLowerCase().includes(
+    let resultat = donne.filter(element =>
+        element.title.toLowerCase().includes(
             e.target.value.toLowerCase()
-        );
-    });
+        ));
+    document.querySelector(".h1").classList.toggle( "hide",resultat.length !== 0);
     affichage(resultat);
 });
 let statyys=document.querySelector(".filter-priorite")
