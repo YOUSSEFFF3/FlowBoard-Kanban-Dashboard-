@@ -2,6 +2,32 @@
     margin: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+.error-container {
+    text-align: center;
+    padding: 30px;
+    background-color: #fff0f0;
+    border: 1px solid #dc3545;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.error-message {
+    color: #dc3545;
+    margin-bottom: 15px;
+}
+
+.refresh-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.refresh-btn:hover {
+    background-color: #bb2d3b;
+}
 
 .cart-form {
     display: column;
