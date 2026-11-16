@@ -1,4 +1,4 @@
-import { donne, apiData, mombers, mombbers } from "./api.js";
+import { donne, apiData, mombers, mombbers } from "../services/api.js";
 export let params = new URLSearchParams();   // empty box
 
 apiData(params, affichage)
