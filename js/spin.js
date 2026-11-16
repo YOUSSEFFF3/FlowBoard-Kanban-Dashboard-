@@ -1,0 +1,1 @@
+export var spinner = new Spin.Spinner(opts).spin(target);
