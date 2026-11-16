@@ -1,12 +1,13 @@
-import { donne, apiData, mombers, mombbers } from "../services/api.js";
-export let params = new URLSearchParams();   // empty box
+import {  apiData, mombers, mombbers } from "./api.js";
+import{ errorContainer,errorMessage, } from "./main.js";
+export let paramss = {}   // empty box
+export let donne=[]
 
-apiData(params, affichage)
 
-mombers(affichMobmbers)
 let conTodo = 0
 let conProgress = 0
 let conDone = 0
+
 export function affichage(cart) {
     let card1 = document.querySelector(".cart-1")
     let card2 = document.querySelector(".cart-2")
@@ -76,6 +77,23 @@ export function affichage(cart) {
     console.log(conDone);
 
 }
+export function resolve(data){
+    donne=data
+         affichage(donne)
+         errorContainer.classList.add("hide");
+          document.querySelector(".form-search").classList.remove("hide")
+          document.querySelector(".les-taches").classList.remove("hide")
+    
+}
+export function rejected(error) {
+    errorContainer.classList.remove("hide");
+        document.querySelector(".form-search").classList.add("hide")
+          document.querySelector(".les-taches").classList.add("hide")
+         errorMessage.textContent =
+             "Impossible de charger les tâches. " + error.message;
+         console.log(error);
+        
+}
 export function affichMobmbers(momber) {
     console.log(momber);
     let select = document.querySelector(".select-mombers")
@@ -86,33 +104,47 @@ export function affichMobmbers(momber) {
         forselect.innerHTML += `<option value="${element.name}">${element.name}</option>`
     });
 }
-let bouton = document.querySelector(".add")
-bouton.addEventListener("click", () => {
+export function newCart (){
     document.querySelector(".cart-form").classList.remove("hide")
     document.querySelector(".les-taches").classList.add("hide")
-})
-let form = document.querySelector(".creation-cart")
-form.addEventListener("submit", event => {
-    event.preventDefault()
-    let formDeta = new FormData(form)
-    const forObj = Object.fromEntries(formDeta)
-    console.log(forObj)
-    donne.push(forObj)
-    console.log(donne);
-    document.querySelector(".cart-form").classList.add("hide")
-    document.querySelector(".les-taches").classList.remove("hide")
-    affichage(donne)
-    reseting(form)
-})
-function reseting(form) {
+}
+
+export function reseting(form) {
     form.reset()
 }
-let retuen = document.querySelector(".return")
-retuen.addEventListener("click", () => {
+
+export function returnFunction() {
     document.querySelector(".cart-form").classList.add("hide")
     document.querySelector(".les-taches").classList.remove("hide")
     reseting(form)
-})
+}
+
+
+export function searchFunction(e)  {
+    let resultat = donne.filter(element =>
+        element.title.toLowerCase().includes(
+            e.target.value.toLowerCase()
+        ));
+    document.querySelector(".h1").classList.toggle("hide", resultat.length !== 0);
+    affichage(resultat);
+};
+export function statusFilter(e)  {
+    if (e.target.value != "") {
+        paramss.priority= e.target.value;
+    } else {
+        paramss={}
+    }
+    apiData(paramss, affichage);
+};
+
+export function momberFiltre (e)  {
+    if (e.target.value != "") {
+        paramss.assignee= e.target.value;
+    } else {
+        paramss={}
+    }
+    apiData(paramss, affichage);
+};
 // export function filteer(data) {
 //     if (!search.value) {
 //         affichage(data)
@@ -143,34 +175,7 @@ retuen.addEventListener("click", () => {
 //     }else affichage(data)
 // })
 // }
-let search = document.querySelector(".search")
-search.addEventListener("input", (e) => {
-    let resultat = donne.filter(element =>
-        element.title.toLowerCase().includes(
-            e.target.value.toLowerCase()
-        ));
-    document.querySelector(".h1").classList.toggle("hide", resultat.length !== 0);
-    affichage(resultat);
-});
-let statyys = document.querySelector(".filter-priorite")
-statyys.addEventListener("change", (e) => {
-    if (e.target.value != "") {
-        params.set("priority", e.target.value);
-    } else {
-        params.delete("priority");
-    }
-    apiData(params, affichage);
-});
-let mombeer = document.querySelector(".select-mombers")
-mombeer.addEventListener("change", (e) => {
-    if (e.target.value != "") {
-        params.set("assignee", e.target.value);
-    } else {
-        params.delete("assignee");
-    }
-    apiData(params, affichage);
-});
-console.log(undefined);
+
 
 
 
