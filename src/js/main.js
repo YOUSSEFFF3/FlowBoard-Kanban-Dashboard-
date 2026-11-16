@@ -2,7 +2,8 @@
 export  let errorContainer = document.querySelector(".error-container");
 export let errorMessage = document.querySelector(".error-message");
 // $$$$$$$$$$$ data fille api js $$$$$$$$$$$$ 
-
+let donne=[]
+let mombbers = []
 import * as jalal from "./api.js"
 console.log(jalal);
 
@@ -16,16 +17,24 @@ import * as larbi from "./ui.js"
 // $$$$$$$$$$$$$$$$ *API call cart* $$$$$$$$$$$$$$$$$
 
  export let apiData = await jalal.apiData(larbi.paramss)
-console.log(apiData.data);
-
+ 
+ console.log(apiData.data,donne);
 try {
-    larbi.resolve(apiData.data)
+    larbi.resolve(apiData.data,donne)
     
 } catch (error) {
     larbi.rejected(error)
     
 }
-
+let momberApi=await jalal.mombers()
+console.log(momberApi);
+try {
+   larbi.resolveMobmbers(momberApi.data,mombbers)
+  
+} catch (error) {
+    
+     larbi.rejected(error)
+}
 
 // $$$$$$$$$$$$$$$$ *fAPI call mombers* $$$$$$$$$$$$$$$$$
 

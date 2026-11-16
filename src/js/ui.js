@@ -1,8 +1,6 @@
-import {  apiData, mombers, mombbers } from "./api.js";
+
 import{ errorContainer,errorMessage, } from "./main.js";
 export let paramss = {}   // empty box
-export let donne=[]
-
 
 let conTodo = 0
 let conProgress = 0
@@ -77,7 +75,8 @@ export function affichage(cart) {
     console.log(conDone);
 
 }
-export function resolve(data){
+
+export function resolve(data,donne){
     donne=data
          affichage(donne)
          errorContainer.classList.add("hide");
@@ -94,12 +93,13 @@ export function rejected(error) {
          console.log(error);
         
 }
-export function affichMobmbers(momber) {
-    console.log(momber);
+export function resolveMobmbers(response,arry) {
+arry=response
+    console.log(arry);
     let select = document.querySelector(".select-mombers")
     let forselect = document.querySelector("#select-assigne")
 
-    momber.forEach(element => {
+    arry.forEach(element => {
         select.innerHTML += `<option value="${element.name}">${element.name}</option>`
         forselect.innerHTML += `<option value="${element.name}">${element.name}</option>`
     });
@@ -145,38 +145,6 @@ export function momberFiltre (e)  {
     }
     apiData(paramss, affichage);
 };
-// export function filteer(data) {
-//     if (!search.value) {
-//         affichage(data)
-//     }
-//     search.addEventListener("input", (e) => {
-//         const v = data.filter(element => {
-//             return element.title.toLowerCase().includes(e.target.value.toLowerCase())
-//         })
-//         affichage(v)
-//     })
-//     statyys.addEventListener("change",(e)=>{
-//         if (e.target.value!="") {
-//            let y = data.filter(element => {
-//             console.log(e.target.value);
-//             return element.priority.includes(e.target.value)
-//     })
-//     affichage(y)
-//     }else affichage(data)
-// })
-// mombeer.addEventListener("change",(e)=>{
-//     if (e.target.value!="") {
-
-//         let a = data.filter(element => {
-//             console.log(e.target.value);
-//             return element.assignee.includes(e.target.value)
-//         })
-//         affichage(a)
-//     }else affichage(data)
-// })
-// }
-
-
 
 
 
