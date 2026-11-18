@@ -1,9 +1,11 @@
 // $$$$$$$$$$$ *les variables*  $$$$$$$$$$$$ 
 export let errorContainer = document.querySelector(".error-container");
 export let errorMessage = document.querySelector(".error-message");
+let mombbers = []
 // $$$$$$$$$$$ data fille api js $$$$$$$$$$$$ 
 
-let mombbers = []
+
+
 import * as jalal from "./api.js"
 
 
@@ -77,9 +79,10 @@ delegation.addEventListener("click", (e) => {
 
  let submitModifie=document.querySelector(".submit-modifie")
  submitModifie.addEventListener("click", larbi.submitLaModification)
-
-//  let chngeStatus=document.querySelector(".chagne-card-status")
-//  chngeStatus.addEventListener("click",larbi.changePositon)
+let allCard=document.querySelector(".les-taches")
+ allCard.addEventListener("change", larbi.selectOjectKeys);
+ let chngeStatus=document.querySelector(".chagne-card-status")
+ chngeStatus.addEventListener("click",larbi.changePositon)
 
  
  

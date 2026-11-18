@@ -1,8 +1,9 @@
 
 import { errorContainer, errorMessage } from "./main.js";
-import { cardGet, cartChange, apiData } from "./api.js";
+import { cardGet, cartChange, apiData ,cardStatusChange} from "./api.js";
 export let paramss = {}   // empty box
 export let donne = []
+export let selectedCard = {};
 let conTodo = 0
 let conProgress = 0
 let conDone = 0
@@ -31,7 +32,7 @@ export function affichage(cart) {
             </div>
             <div class="changeplace">
              <span class="priority btn-subtle theme-primary">${element.priority}</span>
-             <select class="form-control validationCustom04" >
+             <select class="form-control validationCustom04" data-id="${element.id}">
               <option disabled value="">Choose…</option>
               <option value="${element.status}"selected >${element.status}</option>
               <option value="in-progress">in-progress</option>
@@ -57,7 +58,7 @@ export function affichage(cart) {
             </div>
             <div class="changeplace">
              <span class="priority btn-subtle theme-primary">${element.priority}</span>
-             <select class="form-control validationCustom04" >
+             <select class="form-control validationCustom04"  data-id="${element.id}" >
               <option disabled value="">Choose…</option>
               <option value="todo">todo</option>
               <option value="${element.status}" selected>${element.status}</option>
@@ -83,7 +84,7 @@ export function affichage(cart) {
             </div>
             <div class="changeplace">
              <span class="priority btn-subtle theme-primary">${element.priority}</span>
-             <select class="form-control validationCustom04" >
+             <select class="form-control validationCustom04" data-id="${element.id}" >
               <option disabled value="">Choose…</option>
               <option value="todo">todo</option>
               <option value="in-progress" >in-progress</option>
@@ -231,9 +232,33 @@ export async function submitLaModification(e) {
     //  reseting(formInputs)
     returnFunction()
 }
-// export function changePositon() {
-//     let selection=document.querySelectorAll(".validationCustom04")
-//     console.log(selection);
-    
-    
-// }
+export function selectOjectKeys(event) {
+    if (event.target.classList.contains("validationCustom04")) {
+
+        selectedCard.id = event.target.dataset.id;
+        selectedCard.status = event.target.value;
+
+    }
+
+}
+export async function changePositon() {
+
+    if (!selectedCard.id) {
+        return;
+    }
+
+    try {
+        await cardStatusChange(selectedCard.id, selectedCard.status);
+
+        let response = await apiData(paramss);
+
+        resolve(response.data);
+
+        selectedCard = {};
+
+    } catch (error) {
+        rejected(error)
+        console.error(error)
+    }
+}
+
