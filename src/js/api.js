@@ -7,7 +7,7 @@ export async function apiData(params) {
       'X-Workspace': 'public'
     },
     params: params,
-    timeout: 5000 
+    timeout: 5000
   })
 
 }
@@ -18,7 +18,37 @@ export async function mombers() {
     headers: {
       'X-Workspace': 'public'
     },
-    timeout: 5000 
+    timeout: 5000
   });
 
+}
+export async function cardGet(id) {
+  return await axios.get('https://flowboard-api-virid.vercel.app/cards/' + id, {
+    headers: {
+      'X-Workspace': 'public'
+    },
+    timeout: 5000
+  });
+}
+export async function cartChange(id, data) {
+  const options = {
+    method: 'PUT',
+    url: `https://flowboard-api-virid.vercel.app/cards/${id}`,
+    headers: {
+      'X-Workspace': 'public',
+      'Content-Type': 'application/json'
+    },
+    params: {
+      password: "1234"
+    },
+    data: data
+  };
+
+  try {
+    const response = await axios.request(options);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }

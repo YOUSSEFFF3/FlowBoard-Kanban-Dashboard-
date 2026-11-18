@@ -1,11 +1,10 @@
 // $$$$$$$$$$$ *les variables*  $$$$$$$$$$$$ 
-export  let errorContainer = document.querySelector(".error-container");
+export let errorContainer = document.querySelector(".error-container");
 export let errorMessage = document.querySelector(".error-message");
 // $$$$$$$$$$$ data fille api js $$$$$$$$$$$$ 
-let donne=[]
+
 let mombbers = []
 import * as jalal from "./api.js"
-console.log(jalal);
 
 
 // $$$$$$$$$$$data fille ui js$$$$$$$$$$$$ 
@@ -15,25 +14,26 @@ import * as larbi from "./ui.js"
 // ££££££££££££££££££££££££££££££ *function callbaks* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 // $$$$$$$$$$$$$$$$ *API call cart* $$$$$$$$$$$$$$$$$
+// 
+export let apiData = await jalal.apiData(larbi.paramss)
 
- export let apiData = await jalal.apiData(larbi.paramss)
- 
- console.log(apiData.data,donne);
+// console.log(apiData.data, donne);
 try {
-    larbi.resolve(apiData.data,donne)
-    
+    larbi.resolve(apiData.data)
+
 } catch (error) {
     larbi.rejected(error)
-    
+
 }
-let momberApi=await jalal.mombers()
-console.log(momberApi);
+larbi.setDonne(apiData.data);
+let momberApi = await jalal.mombers()
+// console.log(momberApi);
 try {
-   larbi.resolveMobmbers(momberApi.data,mombbers)
-  
+    larbi.resolveMobmbers(momberApi.data, mombbers)
+
 } catch (error) {
-    
-     larbi.rejected(error)
+
+    larbi.rejected(error)
 }
 
 // $$$$$$$$$$$$$$$$ *fAPI call mombers* $$$$$$$$$$$$$$$$$
@@ -50,19 +50,36 @@ jalal.mombers(larbi.affichMobmbers)
 // $$$$$$$$$$$$$$$$ *EVENTS* $$$$$$$$$$$$$$$$$
 
 let bouton = document.querySelector(".add")
-bouton.addEventListener("click",larbi.newCart)
+bouton.addEventListener("click", larbi.newCart)
 
 let form = document.querySelector(".creation-cart")
-form.addEventListener("submit",larbi.formSubmit)
+form.addEventListener("submit", larbi.formSubmit)
 
 let retuen = document.querySelector(".return")
-retuen.addEventListener("click",larbi.returnFunction)
+retuen.addEventListener("click", larbi.returnFunction)
 
 let search = document.querySelector(".search")
-search.addEventListener("input",larbi.searchFunction)
+search.addEventListener("input", larbi.searchFunction)
 
 let statyys = document.querySelector(".filter-priorite")
-statyys.addEventListener("change",larbi.statusFilter)
+statyys.addEventListener("change", larbi.statusFilter)
 
 let mombeer = document.querySelector(".select-mombers")
-mombeer.addEventListener("change",larbi.momberFiltre)
+mombeer.addEventListener("change", larbi.momberFiltre)
+
+let delegation= document.querySelector(".les-taches")
+delegation.addEventListener("click", (e) => {
+    if (e.target.classList.contains("modifier")) {
+        larbi.getcart(e);
+    }
+
+});
+
+ let submitModifie=document.querySelector(".submit-modifie")
+ submitModifie.addEventListener("click", larbi.submitLaModification)
+
+//  let chngeStatus=document.querySelector(".chagne-card-status")
+//  chngeStatus.addEventListener("click",larbi.changePositon)
+
+ 
+ 
