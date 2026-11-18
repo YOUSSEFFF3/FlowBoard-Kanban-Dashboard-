@@ -1,5 +1,5 @@
 // ← les requêtes Axios
-
+import { rejected,resolve, selectedCard,paramss } from "./ui.js";
 export async function apiData(params) {
   let url = 'https://flowboard-api-virid.vercel.app/cards/?'
   return await axios.get(url, {
@@ -51,4 +51,23 @@ export async function cartChange(id, data) {
     console.log(error);
     throw error;
   }
+}
+export async function cardStatusChange(id, status) {
+    try {
+        const response = await axios.patch(
+            `https://flowboard-api-virid.vercel.app/cards/${id}?password=1234`,
+            { status },
+            {
+                headers: {
+                    'X-Workspace': 'public',
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
 }
