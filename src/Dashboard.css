@@ -81,6 +81,10 @@ input {
 .validationCustom04{
     width: 90px;
 }
+.suprim-box{
+    display: flex;
+    justify-content: center;
+}
 .chagne-card-status{
     width: 80px;
 }

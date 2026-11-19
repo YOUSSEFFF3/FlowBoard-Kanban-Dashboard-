@@ -71,13 +71,14 @@ mombeer.addEventListener("change", larbi.momberFiltre)
 
 let delegation= document.querySelector(".les-taches")
 delegation.addEventListener("click", larbi.optionButton);
+delegation.addEventListener("change", larbi.selectOjectKeys);
+
+let chngeStatus=document.querySelector(".chagne-card-status")
+chngeStatus.addEventListener("click",larbi.changePositon)
 
  let submitModifie=document.querySelector(".submit-modifie")
  submitModifie.addEventListener("click", larbi.submitLaModification)
-let allCard=document.querySelector(".les-taches")
- allCard.addEventListener("change", larbi.selectOjectKeys);
- let chngeStatus=document.querySelector(".chagne-card-status")
- chngeStatus.addEventListener("click",larbi.changePositon)
+
 
  
  

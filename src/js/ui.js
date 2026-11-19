@@ -1,6 +1,6 @@
 
 import { errorContainer, errorMessage } from "./main.js";
-import { cardGet, cartChange, apiData ,cardStatusChange,cardSupression} from "./api.js";
+import { cardGet, cartChange, apiData, cardStatusChange, cardSupression } from "./api.js";
 export let paramss = {}   // empty box
 export let donne = []
 export let selectedCard = {};
@@ -247,7 +247,7 @@ export function selectOjectKeys(event) {
         selectedCard.id = event.target.dataset.id;
         selectedCard.status = event.target.value;
     }
-   
+
 }
 export async function changePositon() {
     if (!selectedCard.id) {
@@ -263,22 +263,54 @@ export async function changePositon() {
         console.error(error)
     }
 }
-export function optionButton(e)  {
+export function optionButton(e) {
     if (e.target.classList.contains("modifier")) {
         getcart(e);
     }
-     if (e.target.classList.contains("supresion")) {
+    if (e.target.classList.contains("supresion")) {
         selectedCard.id = e.target.dataset.id;
         console.log(e.target.dataset.id);
-        suprimerAfficher()
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "mgaliser ga3 lwra9????",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "3fat 3la raybi!",
+            cancelButtonText: "katchof Za3ma katfaker§",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) swalWithBootstrapButtons.fire(
+                 suprimerAfficher(),
+                {
+                title: "Deleted!",
+                text: "Your cart has been deleted.",
+                icon: "success"
+            });
+            else if (result.dismiss === Swal.DismissReason.cancel)
+                /* Read more about handling dismissals below */
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelled",
+                    text: "Your cart  is safe :) baraka mn tfeliya ",
+                    icon: "error"
+                });
+        });
+        
     }
 }
+
 export async function suprimerAfficher() {
     if (!selectedCard.id) {
         return;
     }
     try {
-        await cardSupression(selectedCard.id );
+        await cardSupression(selectedCard.id);
         let response = await apiData(paramss);
         resolve(response.data);
         selectedCard = {};
