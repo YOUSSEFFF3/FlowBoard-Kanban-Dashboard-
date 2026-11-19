@@ -1,6 +1,6 @@
 
 import { errorContainer, errorMessage } from "./main.js";
-import { cardGet, cartChange, apiData ,cardStatusChange} from "./api.js";
+import { cardGet, cartChange, apiData ,cardStatusChange,cardSupression} from "./api.js";
 export let paramss = {}   // empty box
 export let donne = []
 export let selectedCard = {};
@@ -46,6 +46,9 @@ export function affichage(cart) {
             </div>
             <button class="modifier btn-outline theme-primary" data-id=${element.id}>Modifier</button>
             </div>
+            <div class="suprim-box">
+             <button class="supresion btn-outline theme-danger" data-id=${element.id} >Suppresion</button>
+            </div>
             </div>
             `
         } else if (element.status == "in-progress") {
@@ -72,6 +75,9 @@ export function affichage(cart) {
             </div>
             <button class="modifier btn-outline theme-primary" data-id=${element.id}>Modifier</button>
             </div>
+            <div class="suprim-box">
+              <button class="supresion btn-outline theme-danger" data-id=${element.id} >Suppresion</button>
+            </div>
             </div>
             `
         } else if (element.status == "done") {
@@ -90,12 +96,16 @@ export function affichage(cart) {
               <option value="in-progress" >in-progress</option>
               <option value="${element.status}" selected>${element.status}</option>
              </select>
-            </div>               <span class="label fw-semibold">Personne assignée *</span>
+            </div>  
+             <span class="label fw-semibold">Personne assignée *</span>
             <div class="asiiig">
             <div class="person-box">
             <span class="assignee fw-normal">${element.assignee}</span>
             </div>
             <button class="modifier btn-outline theme-primary" data-id=${element.id} >Modifier</button>
+            </div>
+            <div class="suprim-box">
+              <button class="supresion btn-outline theme-danger" data-id=${element.id} >Suppresion</button>
             </div>
             </div>`
         }
@@ -234,31 +244,46 @@ export async function submitLaModification(e) {
 }
 export function selectOjectKeys(event) {
     if (event.target.classList.contains("validationCustom04")) {
-
         selectedCard.id = event.target.dataset.id;
         selectedCard.status = event.target.value;
-
     }
-
+   
 }
 export async function changePositon() {
-
     if (!selectedCard.id) {
         return;
     }
-
     try {
         await cardStatusChange(selectedCard.id, selectedCard.status);
-
         let response = await apiData(paramss);
-
         resolve(response.data);
-
         selectedCard = {};
-
     } catch (error) {
         rejected(error)
         console.error(error)
     }
 }
-
+export function optionButton(e)  {
+    if (e.target.classList.contains("modifier")) {
+        getcart(e);
+    }
+     if (e.target.classList.contains("supresion")) {
+        selectedCard.id = e.target.dataset.id;
+        console.log(e.target.dataset.id);
+        suprimerAfficher()
+    }
+}
+export async function suprimerAfficher() {
+    if (!selectedCard.id) {
+        return;
+    }
+    try {
+        await cardSupression(selectedCard.id );
+        let response = await apiData(paramss);
+        resolve(response.data);
+        selectedCard = {};
+    } catch (error) {
+        rejected(error)
+        console.error(error)
+    }
+}

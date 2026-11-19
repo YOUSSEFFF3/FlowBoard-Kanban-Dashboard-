@@ -71,3 +71,25 @@ export async function cardStatusChange(id, status) {
         throw error;
     }
 }
+export async function cardSupression(id) {
+   const options = {
+    method: 'DELETE',
+    url: `https://flowboard-api-virid.vercel.app/cards/${id}`,
+    headers: {
+      'X-Workspace': 'public',
+      'Content-Type': 'application/json'
+    },
+    params: {
+      password: "1234"
+    },
+    
+  };
+
+  try {
+    const response = await axios.request(options);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}

@@ -70,12 +70,7 @@ let mombeer = document.querySelector(".select-mombers")
 mombeer.addEventListener("change", larbi.momberFiltre)
 
 let delegation= document.querySelector(".les-taches")
-delegation.addEventListener("click", (e) => {
-    if (e.target.classList.contains("modifier")) {
-        larbi.getcart(e);
-    }
-
-});
+delegation.addEventListener("click", larbi.optionButton);
 
  let submitModifie=document.querySelector(".submit-modifie")
  submitModifie.addEventListener("click", larbi.submitLaModification)
