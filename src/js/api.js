@@ -1,52 +1,83 @@
 // ← les requêtes Axios
-
-
-
-export async function apiData(params ) {
-    let url = 'https://flowboard-api-virid.vercel.app/cards/?' 
-        return await axios.get(url, {
-             headers: {
-                 'X-Workspace': 'public'
-             },
-             params:params
-         })
-        
- }      
-    // .then(response => {
-    //     if (!response.ok) {
-    //         throw new Error("Erreur : " + response.status);
-    //     }
-    //     return response.json();
-    // })
-    // .then(dataa => {
-    //     donne = dataa;
-    //     affichage(donne);
-    //     errorContainer.classList.add("hide");
-    //      document.querySelector(".form-search").classList.remove("hide")
-    //      document.querySelector(".les-taches").classList.remove("hide")
-    // })
-    // .catch(error => {
-    //     errorContainer.classList.remove("hide");
-    //     document.querySelector(".form-search").classList.add("hide")
-    //      document.querySelector(".les-taches").classList.add("hide")
-    //     errorMessage.textContent =
-    //         "Impossible de charger les tâches. " + error.message;
-    //     console.log(error);
-    // });
-
-
-
-export let mombbers = []
-export function mombers(affichMobmbers) {
-  fetch('https://flowboard-api-virid.vercel.app/members', {
+import { rejected,resolve, selectedCard,paramss } from "./ui.js";
+export async function apiData(params) {
+  let url = 'https://flowboard-api-virid.vercel.app/cards/?'
+  return await axios.get(url, {
     headers: {
       'X-Workspace': 'public'
-    }
+    },
+    params: params,
+    timeout: 5000
   })
-    .then(response => response.json())
-    .then(dataa => {
-      mombbers = dataa
-      affichMobmbers(mombbers)
+}
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-    })
+export async function mombers() {
+  return await axios.get('https://flowboard-api-virid.vercel.app/members', {
+    headers: {
+      'X-Workspace': 'public'
+    },
+    timeout: 5000
+  });
+}
+export async function cardGet(id) {
+  return await axios.get('https://flowboard-api-virid.vercel.app/cards/' + id, {
+    headers: {
+      'X-Workspace': 'public'
+    },
+    timeout: 5000
+  });
+}
+export async function cartChange(id, data) {
+  const options = {
+    method: 'PUT',
+    url: `https://flowboard-api-virid.vercel.app/cards/${id}`,
+    headers: {
+      'X-Workspace': 'public',
+    },
+    params: {
+      password: "1234"
+    },
+    data: data
+  };
+  try {
+    const response = await axios.request(options);
+    return response.data;
+  } catch (error) {
+   rejected(error)
+  }
+}
+export async function cardStatusChange(id, status) {
+    try {
+        const response = await axios.patch(
+            `https://flowboard-api-virid.vercel.app/cards/${id}?password=1234`,
+            { status },
+            {
+                headers: {
+                    'X-Workspace': 'public',
+                }
+            }
+        );
+        return response.data;
+    } catch (error) {
+       rejected(error)
+    }
+}
+export async function cardSupression(id) {
+   const options = {
+    method: 'DELETE',
+    url: `https://flowboard-api-virid.vercel.app/cards/${id}`,
+    headers: {
+      'X-Workspace': 'public',
+    },
+    params: {
+      password: "1234"
+    }, 
+  };
+  try {
+    const response = await axios.request(options);
+    return response.data;
+  } catch (error) {
+    rejected(error)
+  }
 }

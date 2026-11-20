@@ -1,35 +1,34 @@
 // $$$$$$$$$$$ *les variables*  $$$$$$$$$$$$ 
-export  let errorContainer = document.querySelector(".error-container");
+export let errorContainer = document.querySelector(".error-container");
+
 export let errorMessage = document.querySelector(".error-message");
-// $$$$$$$$$$$ data fille api js $$$$$$$$$$$$ 
 
-import * as jalal from "./api.js"
-console.log(jalal);
+let mombbers = []
 
+import * as api from "./api.js"
 
-// $$$$$$$$$$$data fille ui js$$$$$$$$$$$$ 
-
-import * as larbi from "./ui.js"
-
+import * as ui from "./ui.js"
 // ££££££££££££££££££££££££££££££ *function callbaks* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-// $$$$$$$$$$$$$$$$ *API call cart* $$$$$$$$$$$$$$$$$
+export let apiData = await api.apiData(ui.paramss)
 
- export let apiData = await jalal.apiData(larbi.paramss)
-console.log(apiData.data);
-
+// console.log(apiData.data, donne);
 try {
-    larbi.resolve(apiData.data)
-    
+    ui.resolve(apiData.data)
 } catch (error) {
-    larbi.rejected(error)
-    
+    ui.rejected(error)
 }
-
-
+ui.setDonne(apiData.data);
+let momberApi = await api.mombers()
+// console.log(momberApi);
+try {
+    ui.resolveMobmbers(momberApi.data, mombbers)
+} catch (error) {
+    ui.rejected(error)
+}
 // $$$$$$$$$$$$$$$$ *fAPI call mombers* $$$$$$$$$$$$$$$$$
 
-jalal.mombers(larbi.affichMobmbers)
+// api.mombers(ui.affichMobmbers)
 
 
 
@@ -41,19 +40,52 @@ jalal.mombers(larbi.affichMobmbers)
 // $$$$$$$$$$$$$$$$ *EVENTS* $$$$$$$$$$$$$$$$$
 
 let bouton = document.querySelector(".add")
-bouton.addEventListener("click",larbi.newCart)
+bouton.addEventListener("click", ui.newCart)
 
 let form = document.querySelector(".creation-cart")
-form.addEventListener("submit",larbi.formSubmit)
+form.addEventListener("submit", ui.formSubmit)
+
+let refrechBtn=document.querySelector(".refresh-btn")
+refrechBtn.addEventListener("click",()=>{
+    location.reload()
+})
 
 let retuen = document.querySelector(".return")
-retuen.addEventListener("click",larbi.returnFunction)
+retuen.addEventListener("click", ui.returnFunction)
 
 let search = document.querySelector(".search")
-search.addEventListener("input",larbi.searchFunction)
+search.addEventListener("input", ui.searchFunction)
 
 let statyys = document.querySelector(".filter-priorite")
-statyys.addEventListener("change",larbi.statusFilter)
+statyys.addEventListener("change", ui.statusFilter)
 
 let mombeer = document.querySelector(".select-mombers")
-mombeer.addEventListener("change",larbi.momberFiltre)
+mombeer.addEventListener("change", ui.momberFiltre)
+
+let delegation= document.querySelector(".les-taches")
+delegation.addEventListener("click", ui.optionButton);
+delegation.addEventListener("change", ui.selectOjectKeys);
+
+let chngeStatus=document.querySelector(".chagne-card-status")
+chngeStatus.addEventListener("click",ui.alert)
+
+ let submitModifie=document.querySelector(".submit-modifie")
+ submitModifie.addEventListener("click", ui.submitLaModification)
+ let craetAi=document.querySelector(".ai-creation")
+ let butonnAi=document.querySelector(".add-ai")
+ butonnAi.addEventListener("click",()=>{
+    document.querySelector(".cart-form").classList.add("hide")
+    document.querySelector(".les-taches").classList.add("hide")
+    craetAi.classList.remove("hide")
+ })
+ let aiReturn=document.querySelector(".return-ai-btn")
+ aiReturn.addEventListener("click",()=>{
+     document.querySelector(".cart-form").classList.add("hide")
+    document.querySelector(".les-taches").classList.remove("hide")
+    craetAi.classList.add("hide")
+ })
+let aiForm = document.querySelector(".ai-form")
+aiForm.addEventListener("submit", ui.aiFormSubmit)
+
+ 
+ 
