@@ -22,7 +22,7 @@
         </div>
         <div>
             <button class="add btn-outline theme-primary">+New cart</button>
-            <button class="add btn-outline theme-inverse">+New AI cart</button>
+            <button class="add-ai btn-outline theme-inverse">+New AI cart</button>
         </div>
 
     </section>
@@ -46,10 +46,28 @@
             <label>
                 <select class="form-control select-mombers" name="members">
                     <option value="" selected>..choose </option>
-
                 </select>
             </label>
         </form>
+        <!-- $$$$$$$$$$$$$$$$$$$$$$$* AI !!!!!!!!!!!!!!!!!!!! -->
+        <div class="hide ai-creation">
+            <form class="ai-form">
+                <h2 class="H333">Ecrire Ton Prompt</h2>
+                <div class="label ai-div">
+                    <span>*promp earya</span>
+                    <textarea name="description" minlength="20" maxlength="1000" required
+                        class="text-disccccript form-control" ></textarea>
+                </div>
+                <div class="label ai-div">
+                    <span>*conteur</span>
+                    <input type="number" class="form-control" name="conteur" min="1" max="10" value="5" required>
+                </div>
+                <div class="ai-btn">
+                    <button type="button" class="btn-outline theme-success">submit</button>
+                    <button type="button" class="return-ai-btn btn-outline theme-primary">return</button>
+                </div>
+            </form>
+        </div>
         <div class="cart-form hide">
             <h2 class="h2">Nouvelle cart </h2>
             <form class="creation-cart">
@@ -91,7 +109,7 @@
                 <!-- dueDate -->
                 <label class="labele datee">
                     <span class="span">dueDate</span>
-                    <input type="date" class="form-control" name="date" >
+                    <input type="date" class="form-control" name="date">
                 </label>
                 <input type="hidden" name="inputid">
                 <div class="form-button">
@@ -110,7 +128,7 @@
         </div>
         <div>
             <h1>In-Progress <span class="conterpro"></span></h1>
-             <h1 class="h1 hide"> Aucune carte ne correspond à vos filtres </h1>
+            <h1 class="h1 hide"> Aucune carte ne correspond à vos filtres </h1>
             <div class="cart-2">
             </div>
         </div>
@@ -120,8 +138,10 @@
             </div>
         </div>
     </section>
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios@1.19.0/dist/axios.min.js"></script>
 <script type="module" src="js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </html>

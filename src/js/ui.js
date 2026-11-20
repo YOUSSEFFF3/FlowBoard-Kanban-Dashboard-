@@ -120,7 +120,6 @@ export function affichage(cart) {
     // console.log(conDone);
 
 }
-
 export function resolve(data) {
     affichage(data)
     errorContainer.classList.add("hide");
@@ -134,8 +133,8 @@ export function rejected(error) {
     errorMessage.textContent =
         "Impossible de charger les tâches. " + error.message;
     // console.log(error);
-
 }
+
 export function resolveMobmbers(response, arry) {
     arry = response
     // console.log(arry);
@@ -148,6 +147,7 @@ export function resolveMobmbers(response, arry) {
     });
 }
 export function newCart() {
+    document.querySelector(".ai-creation").classList.add("hide")
     document.querySelector(".cart-form").classList.remove("hide")
     document.querySelector(".les-taches").classList.add("hide")
     let h2 = document.querySelector(".h2")
@@ -157,11 +157,9 @@ export function newCart() {
     document.querySelector(".submit-modifie").classList.add("hide")
     document.querySelector(".datee").classList.remove("hide")
 }
-
 export function reseting(form) {
     form.reset()
 }
-
 export function returnFunction() {
     document.querySelector(".cart-form").classList.add("hide")
     document.querySelector(".les-taches").classList.remove("hide")
@@ -186,7 +184,6 @@ export async function statusFilter(e) {
     let filteredData = await apiData(paramss)
     resolve(filteredData.data)
 };
-
 export async function momberFiltre(e) {
     if (e.target.value != "") {
         paramss.assignee = e.target.value;
@@ -198,6 +195,7 @@ export async function momberFiltre(e) {
     resolve(filterM.data)
 };
 export function newCartModified() {
+    document.querySelector(".ai-creation").classList.add("hide")
     document.querySelector(".cart-form").classList.remove("hide")
     document.querySelector(".les-taches").classList.add("hide")
     let h2 = document.querySelector(".h2")
@@ -206,8 +204,6 @@ export function newCartModified() {
     document.querySelector(".submit-card").classList.add("hide")
     document.querySelector(".submit-modifie").classList.remove("hide")
     document.querySelector(".datee").classList.add("hide")
-
-
 }
 export async function getcart(event) {
     newCartModified()
@@ -216,7 +212,7 @@ export async function getcart(event) {
     let { data } = await cardGet(tragetId)
     // console.log(data);
     document.querySelector("[name=title]").value = data.title
-    document.querySelector("[name=description]").value = data.description
+    document.querySelector(".creation-cart [name=description]").value = data.description
     document.querySelector(".stqtus").value = data.status
     document.querySelector(".creation-cart [name=priority]").value = data.priority
     document.querySelector("[name=assignee]").value = data.assignee
@@ -249,6 +245,40 @@ export function selectOjectKeys(event) {
     }
 
 }
+export async function alert() {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+    });
+    const result = await swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "Are you sure you want to change the status?!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, change it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    })
+        if (result.isConfirmed) swalWithBootstrapButtons.fire(
+           changePositon(),
+            {
+            title: "Deleted!",
+            text: "Your status has been changed.",
+            icon: "success"
+        });
+        else if (result.dismiss === Swal.DismissReason.cancel)
+            /* Read more about handling dismissals below */
+            swalWithBootstrapButtons.fire(
+                location.reload(),
+                {
+                title: "Cancelled",
+                text: "Your imaginary file is safe :)",
+                icon: "error"
+            });
+}
 export async function changePositon() {
     if (!selectedCard.id) {
         return;
@@ -263,7 +293,7 @@ export async function changePositon() {
         console.error(error)
     }
 }
-export function optionButton(e) {
+export async function optionButton(e) {
     if (e.target.classList.contains("modifier")) {
         getcart(e);
     }
@@ -277,7 +307,7 @@ export function optionButton(e) {
             },
             buttonsStyling: false
         });
-        swalWithBootstrapButtons.fire({
+        const result = await swalWithBootstrapButtons.fire({
             title: "Are you sure?",
             text: "mgaliser ga3 lwra9????",
             icon: "warning",
@@ -285,25 +315,28 @@ export function optionButton(e) {
             confirmButtonText: "3fat 3la raybi!",
             cancelButtonText: "katchof Za3ma katfaker§",
             reverseButtons: true
-        }).then((result) => {
+        })
+        
             if (result.isConfirmed) swalWithBootstrapButtons.fire(
-                 suprimerAfficher(),
+               suprimerAfficher(),
                 {
-                title: "Deleted!",
-                text: "Your cart has been deleted.",
-                icon: "success"
-            });
+                    title: "Deleted!",
+                    text: "Your cart has been deleted.",
+                    icon: "success"
+                });
             else if (result.dismiss === Swal.DismissReason.cancel)
                 /* Read more about handling dismissals below */
-                swalWithBootstrapButtons.fire({
+                swalWithBootstrapButtons.fire(
+                    
+                    {
                     title: "Cancelled",
                     text: "Your cart  is safe :) baraka mn tfeliya ",
                     icon: "error"
                 });
-        });
-        
+        };
+
     }
-}
+
 
 export async function suprimerAfficher() {
     if (!selectedCard.id) {
